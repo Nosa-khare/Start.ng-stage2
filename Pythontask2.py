@@ -2,7 +2,7 @@ from sys import exit
 from random import randint
 
 User_data = []
-SN = 1 #User serial number variable
+SN = 1  #User serial number variable
 while True:
     firstname = input("Type in firstname: ")
     firstname_list = list(firstname)
@@ -52,14 +52,14 @@ while True:
     print(f"\nUser{SN} details: {user}\n")
 
     data = f"User{SN} details: {user}"
-    User_data.append(data) #store the new user data
+    User_data.append(data)  #store the new user data
 
     print("Do you want to enter another user?")
     while True:
         add_user = input("Yes/No: ")
         if add_user.lower() == "yes":
-            print("") #to pront a blank line in the terminal
-            SN += 1 #to add 1 to value of serial number variable(SN)
+            print("")  #to print a blank line in the terminal
+            SN += 1  #to add 1 to value of serial number variable(SN)
             break
         elif add_user.lower() == "no":
             print("\n", User_data)
