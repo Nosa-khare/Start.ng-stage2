@@ -45,7 +45,7 @@ while True:
         else:
             print("INVALID COMMAND! Type in Yes/No")
 
-    user = {"Firstname": firstname,
+    user = {"Firstname": firstname, 
             "Lastname": lastname,
             "Email": email,
             "Password": password}
