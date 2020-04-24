@@ -1,34 +1,36 @@
 from sys import exit
 from random import randint
+from string import ascii_lowercase
+
+
+def user_details():
+    firstname = input("Type in firstname: ")
+    lastname = input("Type in lastname: ")
+    email = input("Type in email: ")
+    return firstname, lastname, email
+
+
+def create_password():
+    five_characters = []
+    alphabets = list(ascii_lowercase)
+    for x in range(3):
+        five_characters.append(randint(0, 9))
+        if len(five_characters) == 5:
+            break
+        five_characters.append(alphabets[randint(0, 25)])
+    # to convert each integer in the list to a string
+    five_characters = [str(char) for char in five_characters]
+    five_characters = "".join(five_characters)
+    key = details[0][:2] + details[1][-2:] + five_characters
+    return key
+
 
 User_data = []
-SN = 1  #User serial number variable
+SN = 1  # User serial number variable
+
 while True:
-    firstname = input("Type in firstname: ")
-    firstname_list = list(firstname)
-    lastname = input("Type in lastname: ")
-    lastname_list = list(lastname)
-    email = input("Type in email: ")
-
-    five_char = []  # list to contain the last five characters of password
-    # to create a list of alphabets to contribute to the password
-    alpha = "q w e r t y u i o p a s d f g h j k l z x c v b n m"
-    alphabets = alpha.split()
-    while len(five_char) != 5:
-        five_char.append(randint(0, 9))
-        if len(five_char) == 5:
-            break
-        five_char.append(alphabets[randint(0, 25)])
-
-    # to convert each integer in the list to a string
-    five_char = [str(char) for char in five_char]
-    five_char = "".join(five_char)
-    # join first two letters of the firstname
-    f_pass = "".join(firstname_list[0:2])
-    #  join last two letters of the lastname
-    l_pass = "".join(lastname_list[-2:])
-
-    password = f_pass + l_pass + five_char
+    details = list(user_details())
+    password = create_password()
     print(f"Your password is {password}")
     print("Do you want to create a new password?")
 
@@ -44,22 +46,26 @@ while True:
             break
         else:
             print("INVALID COMMAND! Type in Yes/No")
+    details.append(password)
 
-    user = {"Firstname": firstname, 
-            "Lastname": lastname,
-            "Email": email,
-            "Password": password}
+    user = {
+        "Firstname": details[0],
+        "Lastname": details[1],
+        "Email": details[2],
+        "Password": details[3]
+    }
+
     print(f"\nUser{SN} details: {user}\n")
 
     data = f"User{SN} details: {user}"
-    User_data.append(data)  #store the new user data
+    User_data.append(data)  # store the new user data
 
     print("Do you want to enter another user?")
     while True:
         add_user = input("Yes/No: ")
         if add_user.lower() == "yes":
-            print("")  #to print a blank line in the terminal
-            SN += 1  #to add 1 to value of serial number variable(SN)
+            print("")  # to print a blank line in the terminal
+            SN += 1  # to add 1 to value of serial number variable(SN)
             break
         elif add_user.lower() == "no":
             print("\n", User_data)
