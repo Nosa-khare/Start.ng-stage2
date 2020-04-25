@@ -25,7 +25,7 @@ def create_password():
     return key
 
 
-User_data = []
+user_data = {}
 SN = 1  # User serial number variable
 
 while True:
@@ -55,10 +55,8 @@ while True:
         "Password": details[3]
     }
 
-    print(f"\nUser{SN} details: {user}\n")
-
-    data = f"User{SN} details: {user}"
-    User_data.append(data)  # store the new user data
+    print(f"\nUser {SN} details: {user}\n")
+    user_data[f'user {SN}'] = user
 
     print("Do you want to enter another user?")
     while True:
@@ -68,7 +66,8 @@ while True:
             SN += 1  # to add 1 to value of serial number variable(SN)
             break
         elif add_user.lower() == "no":
-            print("\n", User_data)
+            for user, details in list(user_data.items()):
+                print(f"{user} details: {details}")
             exit(0)
         else:
             print("INVALID COMMAND! Type Yes/No")
